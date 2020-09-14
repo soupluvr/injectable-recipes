@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "injectable-recipes",
+  "version": "${version}",
+  "name": "Injectable Recipes API",
+  "description": "API for adding recipes programmatically rather than JSON",
+  "authors": [
+    "Orangemonkey68"
+  ],
+  "contact": {},
+  "license": "LICENSE",
+  "icon": "assets/injectable-recipes/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+
+    ]
+  },
+  "mixins": [
+    "injectable-recipes.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.3+build.207",
+    "fabric": "*",
+    "minecraft": "1.16.3"
+  }
+}
