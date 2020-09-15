@@ -85,8 +85,8 @@ def pomConfig = {
     developers{
         developer{
             id "orangemonkey68"
-            name "Clare Thomason"
-            email "clare.thomason05@gmail.com"
+            name "Clare T"
+            email ""
         }
     }
     scm {
