@@ -1,6 +1,8 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id 'java'
     id 'maven-publish'
+    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id "com.jfrog.bintray" version "1.8.5"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -58,23 +60,55 @@ jar {
     from "LICENSE"
 }
 
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+bintray{
+    user = property('user')
+    key = property('key')
+    pkg {
+        repo = "injectable-recipes"
+        name = "injectable-recipes"
+        licenses = ['GPL-3.0']
+        vcsUrl = 'https://github.com/orangemonkey68/injectable-recipes'
+        version{
+            name = project.mod_version
         }
     }
+}
 
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
+def pomConfig = {
+    licenses {
+        license {
+            name "GNU GENERAL PUBLIC LICENSE Version 3"
+            url "https://www.gnu.org/licenses/gpl-3.0.txt"
+            distribution "repo"
+        }
+    }
+    developers{
+        developer{
+            id "orangemonkey68"
+            name "Clare Thomason"
+            email "clare.thomason05@gmail.com"
+        }
+    }
+    scm {
+        url "https://github.com/orangemonkey68/injectable-recipes"
+    }
+}
+
+publishing{
+    publications{
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact jar
+            groupId maven_group
+            artifactId archives_base_name
+            version version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode("description", "Injectable Recipes is a lightweight API to easily register recipes with Fabric API without a single line of JSON.")
+                rool.appendNode("name", "injectable-recipes")
+                root.appendNode('url', 'https://github.com/orangemonkey68/injectable-recipes')
+                root.children.last + pomConfig
+            }
+        }
     }
 }

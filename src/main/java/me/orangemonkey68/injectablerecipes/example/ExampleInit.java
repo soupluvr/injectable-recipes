@@ -21,7 +21,6 @@ public class ExampleInit implements ModInitializer, RecipeHolder {
     @Override
     public void onInitialize() {
         //It's recommended to construct the recipe map onInitialize, then return that map in getRecipes()
-
         Identifier recipeId = new Identifier("injectable-recipes", "dirtToDiamondsRecipe");
 
         DefaultedList<Ingredient> recipeIngredients = DefaultedList.of();
