@@ -41,6 +41,12 @@ processResources {
     }
 }
 
+repositories {
+    maven {
+        url  "https://dl.bintray.com/orangemonkey68/mods"
+    }
+}
+
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
@@ -60,11 +66,12 @@ jar {
     from "LICENSE"
 }
 
+//still doesn't work
 bintray{
     user = property('user')
     key = property('key')
     pkg {
-        repo = "injectable-recipes"
+        repo = "mods"
         name = "injectable-recipes"
         licenses = ['GPL-3.0']
         vcsUrl = 'https://github.com/orangemonkey68/injectable-recipes'
@@ -98,7 +105,12 @@ publishing{
     publications{
         mavenJava(MavenPublication) {
             from components.java
-            artifact jar
+            artifact(remapJar){
+                builtBy remapJar
+            }
+            artifact(sourcesJar){
+                builtBy sourcesJar
+            }
             groupId maven_group
             artifactId archives_base_name
             version version
@@ -110,5 +122,10 @@ publishing{
                 root.children.last + pomConfig
             }
         }
+    }
+
+    repositories {
+        //Not sure this is necessary
+        mavenLocal()
     }
 }
