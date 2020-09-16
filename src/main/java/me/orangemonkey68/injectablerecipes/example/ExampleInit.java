@@ -1,5 +1,6 @@
 package me.orangemonkey68.injectablerecipes.example;
 
+import me.orangemonkey68.injectablerecipes.InjectableRecipes;
 import me.orangemonkey68.injectablerecipes.RecipeHolder;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.ItemStack;
@@ -19,25 +20,27 @@ public class ExampleInit implements ModInitializer, RecipeHolder {
     private static final Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes = new HashMap<>();
 
     @Override
-    public void onInitialize() {
-        //It's recommended to construct the recipe map onInitialize, then return that map in getRecipes()
-        Identifier recipeId = new Identifier("injectable-recipes", "dirtToDiamondsRecipe");
-
-        DefaultedList<Ingredient> recipeIngredients = DefaultedList.of();
-        recipeIngredients.add(Ingredient.ofItems(Items.DIRT));
-
-        //A shapeless recipe that turns dirt into tiamonds
-        ShapelessRecipe exampleRecipe = new ShapelessRecipe(
-                recipeId,
-                "example-recipes",
-                new ItemStack(Items.DIAMOND),
-                recipeIngredients);
-
-        recipes.get(RecipeType.CRAFTING).put(recipeId, exampleRecipe);
+    public Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getRecipes() {
+        return recipes;
     }
 
     @Override
-    public Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getRecipes() {
-        return recipes;
+    public void onInitialize() {
+        //Creates the sub-map that holds crafting table recipes
+        recipes.put(RecipeType.CRAFTING, new HashMap<>());
+
+        //Sets up the Ingredients to pass into the recipe
+        DefaultedList<Ingredient> recipeIngredients = DefaultedList.of();
+        recipeIngredients.add(Ingredient.ofItems(Items.DIRT));
+
+        ShapelessRecipe exampleRecipe = new ShapelessRecipe(
+                new Identifier("injectable-recipes", "test-recipe-id"),
+                "example-recipes",
+                new ItemStack(Items.DIAMOND),
+                recipeIngredients);
+        recipes.get(RecipeType.CRAFTING).put(new Identifier("injectable-recipes", "test-recipe"), exampleRecipe);
+
+        //Hands over recipes to Injectable Recipes
+        InjectableRecipes.register(this);
     }
 }
