@@ -1,3 +1,4 @@
+[ ![Version](https://api.bintray.com/packages/orangemonkey68/mods/injectable-recipes/images/download.svg?version=1.0.2) ](https://bintray.com/orangemonkey68/mods/injectable-recipes/1.0.2/link)
 # Injectable Recipes
 
 Injectable Recipes is a lightweight API to easily register recipes with Fabric API without a single line of JSON.
@@ -8,6 +9,11 @@ For API documentation and examples see [the wiki pages](https://github.com/orang
 - Recipe Book compatibility
 - Support for all recipe types (crafting, smelting, blasting, etc)
 - Automatically resolves conflicting recipes
+
+## Future Features
+- Logical Datapacks: allow players/modpack devs to overwrite specific recipes with custom datapacks
+- Better recipe conflict detection
+  - Right now you can't register two recipes with the same `Identifier`, but the same recipe can output two different things. In the future this will be detected and neither will be loaded.
 
 ## Version support
 - Verified to be working:
