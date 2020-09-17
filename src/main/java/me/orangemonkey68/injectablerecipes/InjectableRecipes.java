@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class InjectableRecipes {
     private static final Map<Class<? extends RecipeHolder>, Map<RecipeType<?>, Map<Identifier, Recipe<?>>>> holders = new Object2ObjectOpenHashMap<>();
 
-    private InjectableRecipes(){
-
-    }
+//    private InjectableRecipes(){
+//
+//    }
 
     public static void register(RecipeHolder holder){
         if(holders.containsKey(holder.getClass())){
@@ -37,6 +37,7 @@ public class InjectableRecipes {
         return holders.get(holderClass);
     }
 
+    //noinspection CodeBlock2Expr
     public static Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getAllRecipes(){
         List<Map<RecipeType<?>, Map<Identifier, Recipe<?>>>> holderRecipeMaps = new ArrayList<>(holders.values());
         Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipeMap = new Object2ObjectOpenHashMap<>();
