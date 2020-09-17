@@ -50,18 +50,11 @@ public class InjectableRecipes {
                     recipeMap.computeIfAbsent(type, k -> new HashMap<>());
                     recipeMap.get(type).put(id, recipe);
 
-
                     count.getAndIncrement();
                 });
             });
         });
 
-        //delete before prod
-        System.out.println(recipeMap);
-        System.out.println(holderRecipeMaps);
-        System.out.println(holders);
-
-        //keep (delete comment)
         LogManager.getLogger("injectable-recipes").info("Discovered {} recipes to add", count.get());
 
         return recipeMap;
