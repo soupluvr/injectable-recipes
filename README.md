@@ -1,4 +1,4 @@
-[ ![Version](https://api.bintray.com/packages/orangemonkey68/mods/injectable-recipes/images/download.svg?version=1.0.2) ](https://bintray.com/orangemonkey68/mods/injectable-recipes/1.0.2/link)
+[ ![Download](https://api.bintray.com/packages/orangemonkey68/mods/injectable-recipes/images/download.svg?version=1.0.3) ](https://bintray.com/orangemonkey68/mods/injectable-recipes/1.0.3/link)
 # Injectable Recipes
 
 Injectable Recipes is a lightweight API to easily register recipes with Fabric API without a single line of JSON.
